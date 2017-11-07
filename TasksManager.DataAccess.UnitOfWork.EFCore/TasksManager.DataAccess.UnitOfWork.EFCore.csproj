@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TasksManager.DataAccess.UnitOfWork\TasksManager.DataAccess.UnitOfWork.csproj" />
+    <ProjectReference Include="..\TasksManager.Db\TasksManager.Db.csproj" />
+    <ProjectReference Include="..\TasksManager.Entities\TasksManager.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
