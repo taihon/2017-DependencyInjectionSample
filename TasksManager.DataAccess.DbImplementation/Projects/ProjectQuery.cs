@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using TasksManager.DataAccess.Projects;
 using TasksManager.DataAccess.UnitOfWork;
@@ -10,15 +9,17 @@ namespace TasksManager.DataAccess.DbImplementation.Projects
     internal class ProjectQuery : IProjectQuery
     {
         private IUnitOfWork Uow { get; }
+        private IAsyncQueryableFactory Factory { get; }
 
-        public ProjectQuery(IUnitOfWork uow)
+        public ProjectQuery(IUnitOfWork uow, IAsyncQueryableFactory factory)
         {
             Uow = uow;
+            Factory = factory;
         }
 
         public async Task<ProjectResponse> RunAsync(int projectId)
         {
-            ProjectResponse response = await Uow.ProjectsRepository.Query()
+            var response = Uow.ProjectsRepository.Query()
                 .Select(p => new ProjectResponse
                 {
                     Id = p.Id,
@@ -26,9 +27,9 @@ namespace TasksManager.DataAccess.DbImplementation.Projects
                     Description = p.Description,
                     OpenTasksCount = p.Tasks.Count(t => t.Status != Entities.TaskStatus.Completed)
                 })
-                .FirstOrDefaultAsync(pr => pr.Id == projectId);
+            ;
 
-            return response;
+            return await Factory.GetAsyncQueryable(response).FirstOrDefaultAsync(p => p.Id == projectId);
         }
     }
 }

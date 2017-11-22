@@ -4,10 +4,21 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.Extensions.DependencyInjection" Version="1.1.1" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\TasksManager.DataAccess.UnitOfWork\TasksManager.DataAccess.UnitOfWork.csproj" />
     <ProjectReference Include="..\TasksManager.DataAccess\TasksManager.DataAccess.csproj" />
-    <ProjectReference Include="..\TasksManager.Db\TasksManager.Db.csproj" />
     <ProjectReference Include="..\TasksManager.ViewModel\TasksManager.ViewModel.csproj" />
   </ItemGroup>
 

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using TasksManager.Entities;
+using System.Threading.Tasks;
 
 namespace TasksManager.DataAccess.UnitOfWork.EFCore
 {
@@ -43,6 +44,11 @@ namespace TasksManager.DataAccess.UnitOfWork.EFCore
         public void Remove(TEntity entity)
         {
             DbSet.Remove(entity);
+        }
+
+        public Task<TEntity> FirstOrDefaultAsync(IQueryable<TEntity> query, Expression<Func<TEntity, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
     }
 }
